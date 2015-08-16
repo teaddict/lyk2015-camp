@@ -26,7 +26,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 @EnableWebMvc
 @EnableTransactionManagement
 //@ComponentScan({"tr.org.lkd.lyk2015.camp"}) heryeri tarar
-@ComponentScan({"tr.org.lkd.lyk2015.camp.controller","tr.org.lkd.lyk2015.camp.service","tr.org.lkd.lyk2015.camp.repository"})
+@ComponentScan({"tr.org.lkd.lyk2015.camp"})
 
 public class WebConfig extends WebMvcConfigurerAdapter{
 	
@@ -65,7 +65,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 	public ThymeleafViewResolver viewResolver() {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setTemplateEngine(templateEngine());
-
+		viewResolver.setContentType("text/html;charset=UTF-8");
 		return viewResolver;
 	}
 

@@ -3,13 +3,14 @@ package tr.org.lkd.lyk2015.camp.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.NumberFormat;
 
 @MappedSuperclass
-public abstract class AbstractUser {
+public abstract class AbstractUser extends AbstractBaseModel{
 	
-	@Id
-	@GeneratedValue
-	private Long id;
 	private String name;
 	private String surname;
 	private Long tckn;
@@ -24,12 +25,7 @@ public abstract class AbstractUser {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	public String getName() {
 		return name;
 	}

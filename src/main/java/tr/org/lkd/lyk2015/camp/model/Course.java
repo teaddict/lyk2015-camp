@@ -9,11 +9,8 @@ import javax.persistence.ManyToMany;
 
 
 @Entity
-public class Course {
+public class Course extends AbstractBaseModel {
 	
-	@Id
-	@GeneratedValue
-	private Long id;
 	private String name;
 	private String description;
 	private String prerequisities;
@@ -31,13 +28,6 @@ public class Course {
 	@ManyToMany
 	private Set<Instructor> instructors;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;

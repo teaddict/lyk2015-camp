@@ -18,15 +18,12 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
-public class ApplicationForm {
+public class ApplicationForm extends AbstractBaseModel {
 
 	public enum WorkStatus {
 		WORKING, STUDENT, NOT_WORKING
 	}
 	
-	@Id
-	@GeneratedValue
-	private Long id;
 
 	private Integer year;
 
