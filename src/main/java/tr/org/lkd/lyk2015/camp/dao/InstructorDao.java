@@ -1,6 +1,5 @@
 package tr.org.lkd.lyk2015.camp.dao;
 
-import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -14,35 +13,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import tr.org.lkd.lyk2015.camp.model.Admin;
+import tr.org.lkd.lyk2015.camp.model.Instructor;
 
 @Repository
-public class AdminDao {
+public class InstructorDao {
 
     @Autowired
     protected SessionFactory sessionFactory;
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    public Long create(final Admin admin){
-    	
-    	Calendar now = Calendar.getInstance();
-    	admin.setCreateDate(now);
-    	admin.setUpdateDate(now);
-    	
+    public Long create(final Instructor instructor){
+
         final Session session = sessionFactory.getCurrentSession();
-        return (Long) session.save(admin);
+        return (Long) session.save(instructor);
     }
     
     @SuppressWarnings("unchecked")
-	public List<Admin> getAll() {
+	public List<Instructor> getAll() {
 
 		final Session session = sessionFactory.getCurrentSession();
 		//filtreleme yapcağımızı sınıfı giriyoruz
-		final Criteria criteria = session.createCriteria(Admin.class);
+		final Criteria criteria = session.createCriteria(Instructor.class);
 		//tek bi tane çıkartır sonuçları. aynı olanları eler
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		criteria.setFetchMode("*", FetchMode.JOIN); // lazy olanları bile alır "*" sayesinde
-		criteria.add(Restrictions.eq("deleted", false));
+
 		/*
 		criteria.add(Restrictions.add("name","ali"));
 		adı ali olanları getir
@@ -59,4 +55,5 @@ public class AdminDao {
 		
 		return criteria.list();
 	}
+
 }

@@ -1,0 +1,48 @@
+<div th:fragment="content">
+
+	<div class="container">
+		<div class="text-center"><h1>Admins</h1></div>
+		<br>
+
+		<table class="table table-hover">
+			<thead>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Surname</th>
+				<th>Birth Date</th>
+				<th>TC ID</th>
+				<th>E-mail</th>
+				<th>Phone</th>
+				<th>LKD ID</th>
+
+			</thead>
+			<tbody>
+				<tr th:each="admin : ${adminList}">
+
+					<td th:text="${admin.id}"></td>
+
+					<td th:text="${admin.name}"></td>
+
+					<td th:text="${admin.surname}"></td>
+
+					<td th:text="${admin.birthDate}"></td>
+
+					<td th:text="${admin.tckn}"></td>
+
+					<td th:text="${admin.email}"></td>
+
+					<td th:text="${admin.phone}"></td>
+
+					<td th:text="${admin.lkdNo}"></td>
+
+					<td>
+						<form action="#" th:action="@{/admins/update}" method="get">
+							<button name="id" value="${admin.id}" th:value="${admin.id}"
+								class="btn btn-primary">Edit</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

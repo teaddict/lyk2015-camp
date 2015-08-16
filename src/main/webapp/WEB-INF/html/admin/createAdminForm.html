@@ -1,21 +1,77 @@
+<meta charset="utf-8">
+<th:block th:fragment="content">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 well">
+			<h1>Admin Create Form</h1>
 
-<div th:fragment="content">
-<div class="col-md-3" >
-<form action="#" th:action="@{/admins/create}" th:object="${admin}" method="post">
-  
-  <h2>Create Admin</h2>
-    <p>Name: <input type="text" class="form-control"  th:field="*{name}" th:value="${admin.name}"  autofocus required/></p>
-    <p>Surname: <input type="text" class="form-control" th:field="*{surname}" th:value="${admin.surname}" autofocus required /></p>
-    <p>TCKN:<input type="number" class="form-control" th:field="*{tckn}" th:value="${admin.tckn}"  autofocus required/> </p>
-      <p>Birth Date:<input type="text" class="form-control" th:field="*{birthDate}" th:value="${admin.birthDate}"  max="2016" min="1900" autofocus required/> </p>
-        <p>E Mail:<input type="email" class="form-control" th:field="*{email}" th:value="${admin.email}" autofocus required/> </p>
-          <p>Password:<input type="password" class="form-control" th:field="*{password}" th:value="${admin.password}"  autofocus required/> </p>
-            <p>Phone:<input type="number" class="form-control" th:field="*{phone}" th:value="${admin.phone}"  autofocus required/> </p>
-              <p>LKD No:<input type="text" class="form-control" th:field="*{lkdNo}" th:value="${admin.lkdNo}"  autofocus required/> </p>
-                
-    
-    <p><button type="submit" class="btn btn-lg btn-primary btn-block"  >Kaydet</button></p>
-	
-</form>
-</div>
-</div>
+			<!-- 	create form  start-->
+
+			<form action="#" th:action="@{/admins/create}" th:object="${admin}"
+				method="post">
+				<div class="col-md-4">
+
+					<div class="form-group">
+						<label for="InputLkdNo">LKD NO</label> <input type="text"
+							class="form-control" id="lkdNo" placeholder="LKD No"
+							th:field="*{lkdNo}" th:value="${admin.lkdNo}">
+					</div>
+
+					<div class="form-group">
+						<label for="InputName">Name</label> <input type="text"
+							class="form-control" id="name" placeholder="Name"
+							th:field="*{name}" th:value="${admin.name}">
+					</div>
+					<div class="form-group">
+						<label for="InputSurname">Surname</label> <input type="text"
+							class="form-control" id="surname" placeholder="Surname"
+							th:field="*{surname}" th:value="${admin.surname}">
+					</div>
+
+					<div class="form-group">
+						<label for="InputEmail">Email address</label> <input type="email"
+							class="form-control" id="email" placeholder="Email"
+							th:field="*{email}" th:value="${admin.email}">
+					</div>
+					<div class="form-group">
+						<label for="InputPassword1">Password</label> <input
+							type="password" class="form-control" id="password"
+							placeholder="Password" th:field="*{password}" th:value="${admin.password}">
+					</div>
+
+					<div class="form-group">
+ 						<label for="InputPassword2">Password Again</label>
+ 						<input type="password" class="form-control" name="passwordAgain" 
+ 							placeholder="Password Again">
+ 						<label th:text="${message}" th:if="${message} != null" />
+ 					</div> 
+ 					
+
+
+					<div class="form-group">
+						<label for="InputBirthdate">BirthDate</label> <input type="number"
+							class="form-control" id="birthDate" placeholder="BirthDate"
+							th:field="*{birthDate}" th:value="${admin.birthDate}">
+					</div>
+
+
+					<div class="form-group">
+						<label for="InputLkdNo">Phone</label> <input type="text"
+							class="form-control" id="phone" placeholder="phone"
+							th:field="*{phone}" th:value="${admin.phone}">
+					</div>
+
+					<div class="form-group">
+						<label for="InputTckn">TC</label> <input type="text"
+							class="form-control" id="tckn" placeholder="TC KN"
+							th:field="*{tckn}" th:value="${admin.tckn}">
+					</div>
+					<button type="submit" class="btn btn-info" th:type="submit">Submit</button>
+
+				</div>
+			</form>
+
+			<!-- 	create form  stop-->
+		</div>
+	</div>
+
+</th:block>

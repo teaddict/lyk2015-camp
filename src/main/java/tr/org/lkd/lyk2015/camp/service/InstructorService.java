@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tr.org.lkd.lyk2015.camp.dao.AdminDao;
+import tr.org.lkd.lyk2015.camp.dao.InstructorDao;
 import tr.org.lkd.lyk2015.camp.model.Admin;
+import tr.org.lkd.lyk2015.camp.model.Instructor;
 
 import javax.transaction.Transactional;
 import java.io.Serializable;
@@ -14,26 +16,26 @@ import java.util.List;
 
 @Transactional
 @Service
-public class AdminService implements Serializable {
+public class InstructorService implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    protected AdminDao adminDao;
+    protected InstructorDao instructorDao;
 
-    public Long create(final Admin admin) {
+    public Long create(final Instructor instructor) {
 
-        if(admin == null) {
+        if(instructor == null) {
             throw new RuntimeException("Model cannot be null");
         }
 
-        return adminDao.create(admin);
+        return instructorDao.create(instructor);
     }
     
-    public List<Admin> getAll() {
+    public List<Instructor> getAll() {
 
-		return adminDao.getAll();
+		return instructorDao.getAll();
 	}
 }
