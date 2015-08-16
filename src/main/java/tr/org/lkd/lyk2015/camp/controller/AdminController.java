@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tr.org.lkd.lyk2015.camp.model.Admin;
-import tr.org.lkd.lyk2015.camp.model.Instructor;
 import tr.org.lkd.lyk2015.camp.service.AdminService;
-import tr.org.lkd.lyk2015.camp.service.InstructorService;
 
 import java.util.List;
 
@@ -25,8 +23,6 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
-    @Autowired
-    private InstructorService instructorService;
 
     @RequestMapping("")
 	public String list(Model model) {
@@ -61,5 +57,20 @@ public class AdminController {
         return "redirect:/admins";
     }
     
+    @RequestMapping(value = "/update", method = RequestMethod.GET,params={"id"}	)
+	public String getAdminUpdate(Model model,@RequestParam("id") Long id,@RequestParam (value="message",required=false) String message)
+	{
+		Admin admin= adminService.getById(id);
+		model.addAttribute("admin", admin);
+		model.addAttribute("message", message);
+		return "admin/updateAdminForm";
+	}
+    
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String postAdminUpdate(@RequestParam("id") Long id, @ModelAttribute Admin admin, Model model) {
+
+        adminService.update(admin);
+        return "redirect:/admins";
+    }
     
 }

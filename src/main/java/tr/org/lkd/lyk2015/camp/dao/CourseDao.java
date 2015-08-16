@@ -15,9 +15,10 @@ import org.springframework.stereotype.Repository;
 
 import tr.org.lkd.lyk2015.camp.model.AbstractBaseModel;
 import tr.org.lkd.lyk2015.camp.model.Admin;
+import tr.org.lkd.lyk2015.camp.model.Course;
 import tr.org.lkd.lyk2015.camp.service.GenericService;
 
 @Repository
-public class AdminDao extends GenericDao<Admin>{
+public class CourseDao extends GenericDao<Course>{
 
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import tr.org.lkd.lyk2015.camp.model.Admin;
 import tr.org.lkd.lyk2015.camp.model.Instructor;
 import tr.org.lkd.lyk2015.camp.service.InstructorService;
 
@@ -55,7 +54,7 @@ public class InstructorController {
         
         instructorService.create(instructor);
 
-        return "redirects:/instructor";
+        return "redirect:/instructors";
     }
 	
 }
