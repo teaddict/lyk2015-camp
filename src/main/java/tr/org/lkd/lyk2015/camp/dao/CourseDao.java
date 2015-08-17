@@ -21,4 +21,13 @@ import tr.org.lkd.lyk2015.camp.service.GenericService;
 @Repository
 public class CourseDao extends GenericDao<Course>{
 
+	@SuppressWarnings("unchecked")
+	public List<Course> getByIds(List<Long> ids) {
+		// TODO Auto-generated method stub
+		Criteria criteria = createCriteria();
+		criteria.add(Restrictions.in("id",ids));
+		
+		return criteria.list();
+	}
+
 }

@@ -1,5 +1,6 @@
 package tr.org.lkd.lyk2015.camp.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ public class Course extends AbstractBaseModel {
 	}
 
 	@ManyToMany
-	private Set<Instructor> instructors;
+	private Set<Instructor> instructors = new HashSet<>();
 
 
 	public String getName() {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import tr.org.lkd.lyk2015.camp.model.Admin;
 import tr.org.lkd.lyk2015.camp.model.Instructor;
+import tr.org.lkd.lyk2015.camp.service.CourseService;
 import tr.org.lkd.lyk2015.camp.service.InstructorService;
 
 @Controller
@@ -24,6 +25,9 @@ public class InstructorController {
 	
 	@Autowired
 	private InstructorService instructorService;
+	
+	@Autowired
+	private CourseService courseService;
 	
 	@RequestMapping("")
 	public String listInstructors(Model model) {
@@ -36,13 +40,14 @@ public class InstructorController {
 // INSTRUCTOR METHODS
     
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String getInstructorCreate(@ModelAttribute Instructor instructor) {
-
+    public String getInstructorCreate(@ModelAttribute Instructor instructor,Model model) {
+    	
+    	model.addAttribute("courseIds",courseService.getAll());
         return "instructor/createInstructorForm";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String postInstructorCreate(@ModelAttribute @Valid Instructor instructor,@RequestParam(value= "passwordAgain") String passwordAgain, Model model, BindingResult bindingResult){
+    public String postInstructorCreate(@ModelAttribute @Valid Instructor instructor,@RequestParam(value= "passwordAgain") String passwordAgain, @RequestParam("courseIds") List<Long> ids, Model model, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             return "instructor/createInstructorForm";
@@ -54,7 +59,7 @@ public class InstructorController {
         	return "instructor/createInstructorForm";
         }
         
-        instructorService.create(instructor);
+        instructorService.create(instructor,ids);
 
         return "redirect:/instructors";
     }
