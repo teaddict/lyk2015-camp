@@ -107,7 +107,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.format_sql", "true"); //formatlanmış hali
 		properties.put("hibernate.use_sql_comments", "true"); // açıklama ekliyor
-		properties.put("hibernate.enable_lazy_load_no_trans", "true"); //
+		//properties.put("hibernate.enable_lazy_load_no_trans", "true"); //
 		return properties;
 	}
 

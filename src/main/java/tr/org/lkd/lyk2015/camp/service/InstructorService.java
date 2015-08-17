@@ -29,13 +29,20 @@ public class InstructorService extends GenericService<Instructor> {
 	public void create(Instructor instructor, List<Long> ids) {
 		
 		List<Course> courses = courseDao.getByIds(ids);
-		
-		Set<Course> setCourse = new HashSet<>();
+		instructor.getCourses().addAll(courses);
+/*		Set<Course> setCourse = new HashSet<>();
 		setCourse.addAll(courses);
 		
-		instructor.setCourses(setCourse);
+		instructor.setCourses(setCourse);*/
 
 		instructorDao.create(instructor);
+	}
+	
+	public Instructor getInstructorWithCourses(Long id)
+	{
+		Instructor instructor = instructorDao.getByIdWithCourses(id);
+		
+		return instructor;
 	}
 
 

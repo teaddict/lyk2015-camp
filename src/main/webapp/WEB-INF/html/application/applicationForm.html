@@ -1,0 +1,315 @@
+<th:block th:fragment="content">
+	<meta charset="utf-8" />
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+    <form id="theForm" class="form-horizontal well">
+
+      <div class="form-group">
+        <label for="email" class="col-lg-2 col-md-2 control-label">E-postanız</label>
+        <div class="col-lg-10 col-md-10">
+          <input type="email" class="form-control floating-label" id="email" name="email" placeholder="E-posta" required>
+          <span class="help-block">Ön koşul sınavında verdiğiniz eposta ile aynı olmalı!</span>
+        </div>
+      </div>
+
+      <fieldset>
+      <legend>Sizi Tanıyalım</legend>
+
+      <div class="form-group">
+        <label class="col-lg-2 col-md-2 control-label">Cinsiyetiniz</label>
+        <div class="col-lg-10 col-md-10">
+        <div class="radio radio-primary">
+          <label>
+            <input type="radio" name="sex" id="sex1" name="sex" value="MALE">
+          Erkek
+          </label>
+        </div>
+        <div class="radio radio-primary">
+          <label>
+            <input type="radio" name="sex" id="sex2" name="sex" value="FEMALE">
+          Kadın
+          </label>
+        </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="citizenshipNumber" class="col-lg-2 col-md-2 control-label">Tc Kimlik No</label>
+        <div class="col-lg-10 col-md-10">
+          <input type="number" class="form-control floating-label" id="citizenshipNumber" name="citizenshipNumber" placeholder="Tc Kimlik No" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="firstName" class="col-lg-2 col-md-2 control-label">Adınız</label>
+        <div class="col-lg-10 col-md-10">
+          <input type="text" class="form-control floating-label" id="firstName" name="firstName" placeholder="Adınız" required>
+          <span class="help-block">Kimlikte yazıldığı gibi (Tc No doğrulaması için).</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName" class="col-lg-2 col-md-2 control-label">Soyadınız</label>
+        <div class="col-lg-10 col-md-10">
+          <input type="text" class="form-control floating-label" id="lastName" name="lastName" placeholder="Soyadınız" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="birthDate" class="col-lg-2 col-md-2 control-label">Doğum yılınız</label>
+        <div class="col-lg-10 col-md-10">
+          <input type="number" max="2000" min="1935" class="form-control floating-label" id="birthDate" name="birthDate" placeholder="Doğum yılınız" required>
+          <span class="help-block">Yalnızca yıl: örneğin 1992.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-lg-2 col-md-2 control-label">Çalışma durumunuz</label>
+        <div class="col-lg-10 col-md-10">
+        <div class="radio radio-primary">
+          <label>
+            <input type="radio" name="workStatus" id="workStatus1" name="workStatus" value="Çalışıyorum">
+          Çalışıyorum
+          </label>
+        </div>
+        <div class="radio radio-primary">
+          <label>
+            <input type="radio" name="workStatus" id="workStatus2" name="workStatus" value="Öğrenciyim">
+          Öğrenciyim
+          </label>
+        </div>
+        <div class="radio radio-primary">
+          <label>
+            <input type="radio" name="workStatus" id="workStatus2" name="workStatus" value="Çalışmıyorum (ve öğrenci değilim)">
+          Çalışmıyorum (ve öğrenci değilim)
+          </label>
+        </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputPassword" class="col-lg-2 col-md-2 control-label"></label>
+        <div class="col-lg-10 col-md-10">
+        <div class="togglebutton">
+          <label>
+            <input type="checkbox" name="isOfficer" id="isOfficer"> Kamu çalışanıyım
+          </label>
+        </div>
+        <span class="help-block">Kamu çalışanlarına öncelik verilir, ancak kurumunuzdan doğrulama yapılır.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="workDetails" class="col-lg-2 col-md-2 control-label">Çalışma detaylarınız</label>
+        <div class="col-lg-10 col-md-10">
+        <textarea class="form-control floating-label" rows="3" id="workDetails" name="workDetails" placeholder="Çalışıyorsanız kurumunuzu, öğrenciyseniz üniversitenizi belirtiniz." required></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="corporation" class="col-lg-2 col-md-2 control-label"></label>
+        <div class="col-lg-10 col-md-10">
+        <textarea class="form-control floating-label" rows="3" id="corporation" name="corporation" placeholder="Çalışıyorsanız birim ve görevinizi, öğrenciyseniz bölüm ve sınıfınızı belirtiniz." required></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="englishLevel" class="col-lg-2 col-md-2 control-label">İngilizce bilginiz</label>
+        <div class="col-lg-10 col-md-10">
+        <div id="englishLevelSlider" class="slider shor"></div>
+          <input type="number" id="englishLevel" name="englishLevel" min="0" max="10">
+          <span class="help-block">1'den 10'a kadar değerlendiriniz.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="github" class="col-lg-2 col-md-2 control-label">Github</label>
+        <div class="col-lg-10 col-md-10">
+          <input type="text" class="form-control floating-label" id="github" name="github" placeholder="(varsa) Github adresiniz">
+        </div>
+      </div>
+      </fieldset>
+
+      <fieldset>
+      <legend>Kurs Seçimleri</legend>
+
+      <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>Kurs Adı</th>
+                <th>Ön Koşul</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Linux Sistem Yönetimi (1. Düzey)</td>
+                <td><ul><li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li></ul></td>
+            </tr>
+            <tr>
+                <td>Linux Sistem Yönetimi (2. Düzey)</td>
+                <td>
+                  <ul>
+                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
+                    <li>GNU/Linux işletim sistemine hakim</li>
+                    <li>Sunucu servisleri konusunda kendini geliştirmek isteyen</li>
+                    <li>Linux Sistem Yönetimi 1. Düzey Eğitimi konularına hakim</li>
+                  </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Kriptografi ve Ters Kod Mühendisliğine Giriş</td>
+                <td>
+                  <ul>
+                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
+                    <li>Matematik bilgisi ve sevgisi</li>
+                    <li>Temel düzeyde Linux bilgisi</li>
+                  </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>PHP ile Web Programlamaya Giriş</td>
+                <td>
+                  <ul>
+                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
+                    <li>Herhangi bir programlama dilinde yazılım geliştirebilmek</li>
+                    <li>Sanal makine kurabilme / kullanabilme</li>
+                    <li>Temel düzeyde Linux komutlarına aşinalık</li>
+                  </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Django ve Javascript ile Web Programlamaya Giriş</td>
+                <td>
+                  <ul>
+                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
+                    <li>Herhangi bir nesneye yönelik programlama dilinde yazılım geliştirebilmek</li>
+                    <li>Linux masaüstüne aşina olmak (yazılım geliştirme Linux üzerinde yapılacaktır)</li>
+                  </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Ruby on Rails ile Web Programlamaya Giriş</td>
+                <td>
+                <ul>
+                  <li>Temel ruby bilgisine sahip olmak</li>
+                  <li>HTTP, Web Server, Request/Response, REST gibi konulara en azından wikipedia’dan göz gezdirmiş olmak</li>
+                  <li>OOP: Object-oriented programming (Nesne yönelimli programlama) bilgisine sahip olmak</li>
+                  <li>Başka bir dilde MVC, ORM tasarım şablonlarını kullanan frameworkler kullanmış olmak</li>
+                  <li>Herhangi bir VCS kullanmış olmak ve tercihen Git biliyor olmak</li>
+                  <li>Bir GitHub hesabına sahip olmak</li>
+                </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Spring MVC ile Web Programlamaya Giriş</td>
+                <td>
+                  <ul>
+                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
+                    <li>Temel Java ve nesne yönelimli programlama bilgisi</li>
+                    <li>GET/POST methodlarının farkı, form post ve AJAX farkı, session ve cookie kullanımı gibi temel web kavramları bilgisi</li>
+                    <li>Servlet ve Java ile web programlama konularında bilgi bir artı sayılacaktır.</li>
+                  </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Web Uygulama Güvenliği ve Güvenli Kod Geliştirme</td>
+                <td>
+                  <ul>
+                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
+                    <li>Temel düzeyde Linux bilgisi</li>
+                    <li>Herhangi bir web programlama diline orta ya da üstü düzeyde hakim olan.</li>
+                  </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Ağ Uzmanlığına Giriş</td>
+                <td>
+                  <ul>
+                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
+                    <li>Temel düzeyde Linux ve kabuk bilgisi</li>
+                  </ul>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+
+      <div class="form-group">
+        <label for="firstChoice" class="col-lg-2 col-md-2 control-label">1. Tercih</label>
+        <div class="col-lg-10 col-md-10">
+        <select class="form-control" id="firstChoice" name="firstChoice">
+          <option value="">Seçiniz</option>
+          <option value="linux-1">Linux Sistem Yönetimi (1. Düzey)</option>
+          <option value="linux-2">Linux Sistem Yönetimi (2. Düzey)</option>
+          <option value="reverse">Kriptografi ve Ters Kod Mühendisliğine Giriş</option>
+          <option value="php">PHP ile Web Programlamaya Giriş</option>
+          <option value="python">Django ve Javascript ile Web Programlamaya Giriş</option>
+          <option value="ror">Ruby on Rails ile Web Programlamaya Giriş</option>
+          <option value="java">Spring MVC ile Web Programlamaya Giriş</option>
+          <option value="security">Web Uygulama Güvenliği ve Güvenli Kod Geliştirme</option>
+          <option value="network">Ağ Uzmanlığına Giriş</option>
+        </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="secondChoice" class="col-lg-2 col-md-2 control-label">2. Tercih</label>
+        <div class="col-lg-10 col-md-10">
+        <select class="form-control" id="secondChoice" name="secondChoice">
+          <option value="">Seçiniz</option>
+          <option value="linux-1">Linux Sistem Yönetimi (1. Düzey)</option>
+          <option value="linux-2">Linux Sistem Yönetimi (2. Düzey)</option>
+          <option value="reverse">Kriptografi ve Ters Kod Mühendisliğine Giriş</option>
+          <option value="php">PHP ile Web Programlamaya Giriş</option>
+          <option value="python">Django ve Javascript ile Web Programlamaya Giriş</option>
+          <option value="ror">Ruby on Rails ile Web Programlamaya Giriş</option>
+          <option value="java">Spring MVC ile Web Programlamaya Giriş</option>
+          <option value="security">Web Uygulama Güvenliği ve Güvenli Kod Geliştirme</option>
+          <option value="network">Ağ Uzmanlığına Giriş</option>
+        </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="thirdChoice" class="col-lg-2 col-md-2 control-label">3. Tercih</label>
+        <div class="col-lg-10 col-md-10">
+        <select class="form-control" id="thirdChoice" name="thirdChoice">
+          <option value="">Seçiniz</option>
+          <option value="linux-1">Linux Sistem Yönetimi (1. Düzey)</option>
+          <option value="linux-2">Linux Sistem Yönetimi (2. Düzey)</option>
+          <option value="reverse">Kriptografi ve Ters Kod Mühendisliğine Giriş</option>
+          <option value="php">PHP ile Web Programlamaya Giriş</option>
+          <option value="python">Django ve Javascript ile Web Programlamaya Giriş</option>
+          <option value="ror">Ruby on Rails ile Web Programlamaya Giriş</option>
+          <option value="java">Spring MVC ile Web Programlamaya Giriş</option>
+          <option value="security">Web Uygulama Güvenliği ve Güvenli Kod Geliştirme</option>
+          <option value="network">Ağ Uzmanlığına Giriş</option>
+        </select>
+        <span class="help-block">Üç tercih yapmak zorunda değilsiniz, tek tercih de yapabilirsiniz.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="needAccommodation" class="col-lg-2 col-md-2 control-label"></label>
+        <div class="col-lg-10 col-md-10">
+        <div class="togglebutton">
+          <label>
+            <input type="checkbox" name="needAccommodation" id="needAccommodation" checked> Yurtta konaklamak istiyorum
+          </label>
+        </div>
+        <span class="help-block">Yurtta konaklamak ücretlidir.</span>
+        </div>
+      </div>
+
+      </fieldset>
+
+      <div class="form-group">
+      <div class="col-lg-10 col-md-10 col-lg-offset-2">
+        <button type="submit" id="applyBtn" class="btn btn-primary pull-right">Başvur</button>
+      </div>
+      </div>
+    </form>
+    </div>
+  </div>
+
+</th:block>

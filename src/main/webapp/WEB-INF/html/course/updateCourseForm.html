@@ -34,6 +34,10 @@
 					type="text" class="form-control" id="detailPageLink"
 					placeholder="Detail Page Link" th:field="*{detailPageLink}" th:value="*{detailPageLink}">
 			</div>
+			<div class="form-group">
+				<label for="InputActive">Active</label>
+				<input type="checkbox" name="active" th:checked="*{active}" th:field="*{active}"/>
+			</div>
 			<button type="submit" class="btn btn-info">Submit</button>
 			
 			</div>
