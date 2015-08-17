@@ -69,6 +69,7 @@ public class InstructorController {
 	{
 		Instructor instructor= instructorService.getById(id);
 		model.addAttribute("instructor", instructor);
+		model.addAttribute("courses",courseService.getAll());
 		model.addAttribute("message", message);
 		return "instructor/updateInstructorForm";
 	}

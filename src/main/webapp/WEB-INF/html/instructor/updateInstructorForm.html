@@ -57,6 +57,17 @@
 					type="text" class="form-control" id="tckn"
 					placeholder="TC KN" th:field="*{tckn}">
 			</div>
+			
+			<div class="form-group">
+				<select multiple name="courseIds" class="form-group">
+			  		<option th:each="course : ${courses}" 
+			        	  	th:value="${course.id}" 
+			          		th:text="${course.name}" 
+			          		th:selected="${#lists.contains(instructor.courses,course)}">
+			         </option>
+				</select>
+			</div>
+			
 			<button type="submit" class="btn btn-info">Submit</button>
 			
 			</div>

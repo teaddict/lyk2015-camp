@@ -26,7 +26,7 @@ public class Course extends AbstractBaseModel {
 		this.active = active;
 	}
 
-	@ManyToMany
+	@ManyToMany(mappedBy= "courses")
 	private Set<Instructor> instructors = new HashSet<>();
 
 

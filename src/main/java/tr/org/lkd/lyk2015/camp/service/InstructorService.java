@@ -30,7 +30,7 @@ public class InstructorService extends GenericService<Instructor> {
 		
 		List<Course> courses = courseDao.getByIds(ids);
 		
-		Set<Course> setCourse = new HashSet();
+		Set<Course> setCourse = new HashSet<>();
 		setCourse.addAll(courses);
 		
 		instructor.setCourses(setCourse);
