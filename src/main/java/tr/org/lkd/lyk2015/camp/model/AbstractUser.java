@@ -15,7 +15,7 @@ public abstract class AbstractUser extends AbstractBaseModel{
 	private String surname;
 	private Long tckn;
 	private Integer birthDate; 
-	private String email;
+	private String email="test";
 	private String password;
 	private String phone;
 	

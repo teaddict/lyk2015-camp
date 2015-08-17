@@ -3,12 +3,12 @@
 
   <div class="row">
     <div class="col-md-offset-2 col-md-8">
-    <form id="theForm" class="form-horizontal well">
+    <form id="theForm" class="form-horizontal well" th:object="${form}">
 
       <div class="form-group">
         <label for="email" class="col-lg-2 col-md-2 control-label">E-postanız</label>
         <div class="col-lg-10 col-md-10">
-          <input type="email" class="form-control floating-label" id="email" name="email" placeholder="E-posta" required>
+          <input type="email" class="form-control floating-label" id="email" th:field="*{student.email}" placeholder="E-posta" required>
           <span class="help-block">Ön koşul sınavında verdiğiniz eposta ile aynı olmalı!</span>
         </div>
       </div>

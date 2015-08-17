@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
-public class ApplicationForm extends AbstractBaseModel {
+public class Application extends AbstractBaseModel {
 
 	public enum WorkStatus {
 		WORKING, STUDENT, NOT_WORKING
