@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,22 @@ public class CourseController {
         
         courseService.create(course);
 
+        return "redirect:/courses";
+    }
+    
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+	public String getCourseUpdate(@PathVariable("id") Long id, Model model,@RequestParam (value="message",required=false) String message)
+	{
+		Course course= courseService.getById(id);
+		model.addAttribute("course", course);
+		model.addAttribute("message", message);
+		return "course/updateCourseForm";
+	}
+    
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String postCourseUpdate(@PathVariable("id") Long id, @ModelAttribute Course course, Model model) {
+
+        courseService.update(course);
         return "redirect:/courses";
     }
 	

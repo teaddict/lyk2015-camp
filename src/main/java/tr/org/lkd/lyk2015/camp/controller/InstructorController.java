@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import tr.org.lkd.lyk2015.camp.model.Admin;
 import tr.org.lkd.lyk2015.camp.model.Instructor;
 import tr.org.lkd.lyk2015.camp.service.InstructorService;
 
@@ -54,6 +56,22 @@ public class InstructorController {
         
         instructorService.create(instructor);
 
+        return "redirect:/instructors";
+    }
+    
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+	public String getAdminUpdate(@PathVariable("id") Long id,Model model,@RequestParam (value="message",required=false) String message)
+	{
+		Instructor instructor= instructorService.getById(id);
+		model.addAttribute("instructor", instructor);
+		model.addAttribute("message", message);
+		return "instructor/updateInstructorForm";
+	}
+    
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String postInstructornUpdate(@PathVariable("id") Long id, @ModelAttribute Instructor instructor, Model model) {
+
+        instructorService.update(instructor);
         return "redirect:/instructors";
     }
 	

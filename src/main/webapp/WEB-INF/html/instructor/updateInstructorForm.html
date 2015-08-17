@@ -1,0 +1,69 @@
+<meta charset="utf-8">
+<th:block th:fragment="content">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 well">
+			<h1>Instructor Create Form </h1>
+			<p th:text="${message}" />
+		
+
+		<!-- 	create form  start-->
+
+	<form action="#" th:action="@{/instructors/update/__${instructor.id}__}" th:object="${instructor}" method="post">
+	
+			<div class="col-md-4">
+			
+			<div class="form-group">
+				<label for="InputName">Name</label> <input
+					type="text" class="form-control" id="name"
+					placeholder="Name" th:field="*{name}">
+			</div>
+			<div class="form-group">
+				<label for="InputSurname">Surname</label> <input
+					type="text" class="form-control" id="surname"
+					placeholder="Surname" th:field="*{surname}">
+			</div>
+			
+			<div class="form-group">
+				<label for="InputEmail">Email address</label> <input
+					type="email" class="form-control" id="email"
+					placeholder="Email" th:field="*{email}">
+			</div>
+			<div class="form-group">
+				<label for="InputPassword1">Password</label> <input
+					type="password" class="form-control" id="password"
+					placeholder="Password" th:field="*{password}">
+			</div>
+			<div class="form-group">
+ 						<label for="InputPassword2">Password Again</label>
+ 						<input type="password" class="form-control" name="passwordAgain" 
+ 							placeholder="Password Again">
+ 						<label th:text="${message}" th:if="${message} != null" />
+ 			</div> 
+ 					
+			<div class="form-group">
+				<label for="InputBirthdate">BirthDate</label> <input
+					type="number" class="form-control" id="birthDate"
+					placeholder="BirthDate" th:field="*{birthDate}">
+			</div>
+			
+			<div class="form-group">
+				<label for="phone">Phone</label> <input
+					type="text" class="form-control" id="phone"
+					placeholder="phone"  th:field="*{phone}">
+			</div>
+			
+			<div class="form-group">
+				<label for="InputTckn">TC KN</label> <input
+					type="text" class="form-control" id="tckn"
+					placeholder="TC KN" th:field="*{tckn}">
+			</div>
+			<button type="submit" class="btn btn-info">Submit</button>
+			
+			</div>
+		</form>
+
+		<!-- 	create form  stop-->
+		</div>
+	</div>
+
+</th:block>

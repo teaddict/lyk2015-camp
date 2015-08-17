@@ -15,7 +15,7 @@ public class Course extends AbstractBaseModel {
 	private String description;
 	private String prerequisities;
 	private String detailPageLink;
-	private Boolean active;
+	private Boolean active=true;
 	
 	public Boolean getActive() {
 		return active;

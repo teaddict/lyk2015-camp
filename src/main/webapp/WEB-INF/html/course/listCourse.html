@@ -25,11 +25,10 @@
 					<td th:text="${course.prerequisities}"></td>
 
 					<td th:text="${course.detailPageLink}"></td>
-					<td th:text="${course.active}"></td>
+					<th:block th:if= "${course.active}"><td>Aktif</td></th:block>
+					<th:block th:if= "!${course.active}"><td>Pasif</td></th:block>
 					<td>
-						<form action="#" th:action="@{/courses/update}" method="get">
-							<button name="id" value="${course.id}" th:value="${course.id}"
-								class="btn btn-primary">Edit</button>
+						<a th:href="@{/courses/update/__${course.id}__}" class="btn btn-primary">Edit</a>
 								
 						</form>
 					</td>

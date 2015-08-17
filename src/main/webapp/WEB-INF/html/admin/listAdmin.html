@@ -36,10 +36,8 @@
 					<td th:text="${admin.lkdNo}"></td>
 
 					<td>
-						<form action="#" th:action="@{/admins/update}" method="get">
-							<button name="id" value="${admin.id}" th:value="${admin.id}"
-								class="btn btn-primary">Edit</button>
-						</form>
+						<a th:href="@{/admins/update/__${admin.id}__}" class="btn btn-primary">Edit</a>
+								
 					</td>
 				</tr>
 			</tbody>

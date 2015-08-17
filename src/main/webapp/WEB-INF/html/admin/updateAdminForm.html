@@ -8,7 +8,7 @@
             <h1>Admin Update Form</h1>
             <!-- 	create form  start-->
 
-            <form action="#" th:action="@{'/admins/update'(id=${admin.id})}" th:object="${admin}" method="post">
+            <form action="#" th:action="@{/admins/update/__${admin.id}__}" th:object="${admin}" method="post">
                 <div class="col-md-4">
 
                     <div class="form-group">

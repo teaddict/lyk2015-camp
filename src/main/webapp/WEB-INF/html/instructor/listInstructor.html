@@ -33,11 +33,8 @@
 					<td th:text="${instructor.phone}"></td>
 
 					<td>
-						<form action="#" th:action="@{/instructor/update}" method="get">
-							<button name="id" value="${instructor.id}" th:value="${instructor.id}"
-								class="btn btn-primary">Edit</button>
+						<a th:href="@{/instructors/update/__${instructor.id}__}" class="btn btn-primary">Edit</a>
 								
-						</form>
 					</td>
 				</tr>
 			</tbody>

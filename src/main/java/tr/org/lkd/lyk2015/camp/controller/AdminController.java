@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,8 +58,8 @@ public class AdminController {
         return "redirect:/admins";
     }
     
-    @RequestMapping(value = "/update", method = RequestMethod.GET,params={"id"}	)
-	public String getAdminUpdate(Model model,@RequestParam("id") Long id,@RequestParam (value="message",required=false) String message)
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+	public String getAdminUpdate(@PathVariable("id") Long id,Model model,@RequestParam (value="message",required=false) String message)
 	{
 		Admin admin= adminService.getById(id);
 		model.addAttribute("admin", admin);
@@ -66,8 +67,8 @@ public class AdminController {
 		return "admin/updateAdminForm";
 	}
     
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String postAdminUpdate(@RequestParam("id") Long id, @ModelAttribute Admin admin, Model model) {
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String postAdminUpdate(@PathVariable("id") Long id, @ModelAttribute Admin admin, Model model) {
 
         adminService.update(admin);
         return "redirect:/admins";
