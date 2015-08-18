@@ -7,9 +7,10 @@
 
       <div class="form-group">
         <label for="email" class="col-lg-2 col-md-2 control-label">E-postanız</label>
-        <div class="col-lg-10 col-md-10">
-          <input type="email" class="form-control floating-label" id="email" th:field="*{student.email}" placeholder="E-posta" required>
+        <div class="col-lg-10 col-md-10" th:errorclass="has-error" name="student.email">
+          <input type="email" class="form-control floating-label" id="email" th:field="*{student.email}" th:field="*{student.email}" placeholder="E-posta" required>
           <span class="help-block">Ön koşul sınavında verdiğiniz eposta ile aynı olmalı!</span>
+          <p th:if="${#fields.hasErrors('student.email')}" th:errors="*{student.email}" class="text-danger"></p>
         </div>
       </div>
 
@@ -21,12 +22,12 @@
         <div class="col-lg-10 col-md-10">
         <div class="radio radio-primary">
           <label>
-            <input type="radio" id="sex1" th:field="*{student.sex}" value="MALE"> Erkek
+            <input type="radio" id="sex1" th:field="*{student.sex}" value="MALE" name="sex"> Erkek
           </label>
         </div>
         <div class="radio radio-primary">
           <label>
-            <input type="radio" id="sex2" th:field="*{student.sex}" value="FEMALE"> Kadın
+            <input type="radio" id="sex2" th:field="*{student.sex}" value="FEMALE" name="sex"> Kadın
           </label>
         </div>
         </div>
@@ -35,8 +36,9 @@
       
       <div class="form-group">
         <label for="citizenshipNumber" class="col-lg-2 col-md-2 control-label">Tc Kimlik No</label>
-        <div class="col-lg-10 col-md-10">
+        <div class="col-lg-10 col-md-10" th:errorclass="has-error" name="student.tckn">
           <input type="number" class="form-control floating-label" id="citizenshipNumber" th:field="*{student.tckn}" th:value="*{student.tckn}" placeholder="Tc Kimlik No" required>
+		  <p th:if="${#fields.hasErrors('student.tckn')}" th:errors="*{student.tckn}" class="text-danger"> HATA</p>
         </div>
       </div>
 
@@ -57,8 +59,9 @@
 
       <div class="form-group">
         <label for="birthDate" class="col-lg-2 col-md-2 control-label">Doğum yılınız</label>
-        <div class="col-lg-10 col-md-10">
-          <input type="number" max="2000" min="1935" class="form-control floating-label" id="birthDate" th:field="*{student.birthDate}" th:value="*{student.birthDate}" placeholder="Doğum yılınız" required>
+        <div class="col-lg-10 col-md-10" th:errorclass="has-error" name="student.birthDate">
+          <input type="number" max="2015" min="1935" class="form-control floating-label" id="birthDate" th:field="*{student.birthDate}" th:value="*{student.birthDate}" placeholder="Doğum yılınız" required>
+           <p th:if="${#fields.hasErrors('student.birthDate')}" th:errors="*{student.birthDate}" class="text-danger"></p>
           <span class="help-block">Yalnızca yıl: örneğin 1992.</span>
         </div>
       </div>
@@ -89,12 +92,13 @@
      
       <div class="form-group">
         <label for="inputPassword" class="col-lg-2 col-md-2 control-label"></label>
-        <div class="col-lg-10 col-md-10">
+        <div class="col-lg-10 col-md-10" th:errorclass="has-error" name="application.officer">
         <div class="togglebutton">
           <label>
             <input type="checkbox" name="isOfficer" id="isOfficer" th:field="*{application.officer}" th:value="*{application.officer}" > Kamu çalışanıyım
           </label>
         </div>
+        <p th:if="${#fields.hasErrors('application.officer')}" th:errors="*{application.officer}" class="text-danger"></p>
         <span class="help-block">Kamu çalışanlarına öncelik verilir, ancak kurumunuzdan doğrulama yapılır.</span>
         </div>
       </div>
