@@ -16,35 +16,34 @@
       <fieldset>
       <legend>Sizi Tanıyalım</legend>
 
-      <div class="form-group">
+       <div class="form-group">
         <label class="col-lg-2 col-md-2 control-label">Cinsiyetiniz</label>
         <div class="col-lg-10 col-md-10">
         <div class="radio radio-primary">
           <label>
-            <input type="radio" name="sex" id="sex1" name="sex" value="MALE">
-          Erkek
+            <input type="radio" id="sex1" th:field="*{student.sex}" value="MALE"> Erkek
           </label>
         </div>
         <div class="radio radio-primary">
           <label>
-            <input type="radio" name="sex" id="sex2" name="sex" value="FEMALE">
-          Kadın
+            <input type="radio" id="sex2" th:field="*{student.sex}" value="FEMALE"> Kadın
           </label>
         </div>
         </div>
-      </div>
+      </div>	
+
       
       <div class="form-group">
         <label for="citizenshipNumber" class="col-lg-2 col-md-2 control-label">Tc Kimlik No</label>
         <div class="col-lg-10 col-md-10">
-          <input type="number" class="form-control floating-label" id="citizenshipNumber" name="citizenshipNumber" placeholder="Tc Kimlik No" required>
+          <input type="number" class="form-control floating-label" id="citizenshipNumber" th:field="*{student.tckn}" th:value="*{student.tckn}" placeholder="Tc Kimlik No" required>
         </div>
       </div>
 
       <div class="form-group">
         <label for="firstName" class="col-lg-2 col-md-2 control-label">Adınız</label>
         <div class="col-lg-10 col-md-10">
-          <input type="text" class="form-control floating-label" id="firstName" name="firstName" placeholder="Adınız" required>
+          <input type="text" class="form-control floating-label" id="firstName" th:field="*{student.name}" th:value="*{student.name}" placeholder="Adınız" required>
           <span class="help-block">Kimlikte yazıldığı gibi (Tc No doğrulaması için).</span>
         </div>
       </div>
@@ -52,14 +51,14 @@
       <div class="form-group">
         <label for="lastName" class="col-lg-2 col-md-2 control-label">Soyadınız</label>
         <div class="col-lg-10 col-md-10">
-          <input type="text" class="form-control floating-label" id="lastName" name="lastName" placeholder="Soyadınız" required>
+          <input type="text" class="form-control floating-label" id="lastName" th:field="*{student.surname}" th:value="*{student.surname}" placeholder="Soyadınız" required>
         </div>
       </div>
 
       <div class="form-group">
         <label for="birthDate" class="col-lg-2 col-md-2 control-label">Doğum yılınız</label>
         <div class="col-lg-10 col-md-10">
-          <input type="number" max="2000" min="1935" class="form-control floating-label" id="birthDate" name="birthDate" placeholder="Doğum yılınız" required>
+          <input type="number" max="2000" min="1935" class="form-control floating-label" id="birthDate" th:field="*{student.birthDate}" th:value="*{student.birthDate}" placeholder="Doğum yılınız" required>
           <span class="help-block">Yalnızca yıl: örneğin 1992.</span>
         </div>
       </div>
@@ -69,31 +68,50 @@
         <div class="col-lg-10 col-md-10">
         <div class="radio radio-primary">
           <label>
-            <input type="radio" name="workStatus" id="workStatus1" name="workStatus" value="Çalışıyorum">
+            <input type="radio" name="workStatus" id="workStatus1" th:field="*{application.workStatus}" value="Çalışıyorum">
           Çalışıyorum
           </label>
         </div>
         <div class="radio radio-primary">
           <label>
-            <input type="radio" name="workStatus" id="workStatus2" name="workStatus" value="Öğrenciyim">
+            <input type="radio" id="workStatus2" th:field="*{application.workStatus}" value="Öğrenciyim">
           Öğrenciyim
           </label>
         </div>
         <div class="radio radio-primary">
           <label>
-            <input type="radio" name="workStatus" id="workStatus2" name="workStatus" value="Çalışmıyorum (ve öğrenci değilim)">
+            <input type="radio" name="workStatus" id="workStatus2" th:field="*{application.workStatus}" value="Çalışmıyorum (ve öğrenci değilim)">
           Çalışmıyorum (ve öğrenci değilim)
           </label>
         </div>
         </div>
       </div>
+      <div class="form-group">
+        <label class="col-lg-2 col-md-2 control-label">Cinsiyetiniz</label>
+        <div class="col-lg-10 col-md-10">
+        <div class="radio radio-primary">
+          <label>
+            <input type="radio" id="sex1" th:field="*{student.sex}" value="MALE"> Erkek
+          </label>
+        </div>
+        <div class="radio radio-primary">
+          <label>
+            <input type="radio" id="sex2" th:field="*{student.sex}" value="FEMALE"> Kadın
+          </label>
+        </div>
+        </div>
+      </div>	
+
+
+
+
 
       <div class="form-group">
         <label for="inputPassword" class="col-lg-2 col-md-2 control-label"></label>
         <div class="col-lg-10 col-md-10">
         <div class="togglebutton">
           <label>
-            <input type="checkbox" name="isOfficer" id="isOfficer"> Kamu çalışanıyım
+            <input type="checkbox" name="isOfficer" id="isOfficer" th:field="*{application.officer}" th:value="*{application.officer}" > Kamu çalışanıyım
           </label>
         </div>
         <span class="help-block">Kamu çalışanlarına öncelik verilir, ancak kurumunuzdan doğrulama yapılır.</span>
@@ -103,14 +121,14 @@
       <div class="form-group">
         <label for="workDetails" class="col-lg-2 col-md-2 control-label">Çalışma detaylarınız</label>
         <div class="col-lg-10 col-md-10">
-        <textarea class="form-control floating-label" rows="3" id="workDetails" name="workDetails" placeholder="Çalışıyorsanız kurumunuzu, öğrenciyseniz üniversitenizi belirtiniz." required></textarea>
+        <textarea class="form-control floating-label" rows="3" id="workDetails" th:field="*{application.workDetails}" th:value="*{application.workDetails}" placeholder="Çalışıyorsanız kurumunuzu, öğrenciyseniz üniversitenizi belirtiniz." required></textarea>
         </div>
       </div>
 
       <div class="form-group">
         <label for="corporation" class="col-lg-2 col-md-2 control-label"></label>
         <div class="col-lg-10 col-md-10">
-        <textarea class="form-control floating-label" rows="3" id="corporation" name="corporation" placeholder="Çalışıyorsanız birim ve görevinizi, öğrenciyseniz bölüm ve sınıfınızı belirtiniz." required></textarea>
+        <textarea class="form-control floating-label" rows="3" id="corporation" th:field="*{application.corporation}" th:value="*{application.corporation}" name="corporation" placeholder="Çalışıyorsanız birim ve görevinizi, öğrenciyseniz bölüm ve sınıfınızı belirtiniz." required></textarea>
         </div>
       </div>
 
@@ -118,7 +136,7 @@
         <label for="englishLevel" class="col-lg-2 col-md-2 control-label">İngilizce bilginiz</label>
         <div class="col-lg-10 col-md-10">
         <div id="englishLevelSlider" class="slider shor"></div>
-          <input type="number" id="englishLevel" name="englishLevel" min="0" max="10">
+          <input type="number" id="englishLevel" th:field="*{application.englishLevel}" th:value="*{application.englishLevel}" min="0" max="10">
           <span class="help-block">1'den 10'a kadar değerlendiriniz.</span>
         </div>
       </div>
@@ -126,7 +144,7 @@
       <div class="form-group">
         <label for="github" class="col-lg-2 col-md-2 control-label">Github</label>
         <div class="col-lg-10 col-md-10">
-          <input type="text" class="form-control floating-label" id="github" name="github" placeholder="(varsa) Github adresiniz">
+          <input type="text" class="form-control floating-label" id="github" th:field="*{application.githubLink}" th:value="*{application.githubLink}"  placeholder="(varsa) Github adresiniz">
         </div>
       </div>
       </fieldset>
@@ -141,94 +159,17 @@
                 <th>Ön Koşul</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody th:each="course : ${courseList}">
             <tr>
-                <td>Linux Sistem Yönetimi (1. Düzey)</td>
-                <td><ul><li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li></ul></td>
-            </tr>
-            <tr>
-                <td>Linux Sistem Yönetimi (2. Düzey)</td>
+                <td th:text="${course.name}">Linux Sistem Yönetimi (1. Düzey)</td>
                 <td>
-                  <ul>
-                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
-                    <li>GNU/Linux işletim sistemine hakim</li>
-                    <li>Sunucu servisleri konusunda kendini geliştirmek isteyen</li>
-                    <li>Linux Sistem Yönetimi 1. Düzey Eğitimi konularına hakim</li>
-                  </ul>
+                	<ul>
+                	<li th:text="${course.description}">Gereklilikler</li>
+                	</ul>
                 </td>
-            </tr>
-            <tr>
-                <td>Kriptografi ve Ters Kod Mühendisliğine Giriş</td>
-                <td>
-                  <ul>
-                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
-                    <li>Matematik bilgisi ve sevgisi</li>
-                    <li>Temel düzeyde Linux bilgisi</li>
-                  </ul>
+                <td th:text="${course.prerequrities}">Okuduğunu anlayabilecek düzeyde İngilizce bilgisi
                 </td>
-            </tr>
-            <tr>
-                <td>PHP ile Web Programlamaya Giriş</td>
-                <td>
-                  <ul>
-                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
-                    <li>Herhangi bir programlama dilinde yazılım geliştirebilmek</li>
-                    <li>Sanal makine kurabilme / kullanabilme</li>
-                    <li>Temel düzeyde Linux komutlarına aşinalık</li>
-                  </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Django ve Javascript ile Web Programlamaya Giriş</td>
-                <td>
-                  <ul>
-                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
-                    <li>Herhangi bir nesneye yönelik programlama dilinde yazılım geliştirebilmek</li>
-                    <li>Linux masaüstüne aşina olmak (yazılım geliştirme Linux üzerinde yapılacaktır)</li>
-                  </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Ruby on Rails ile Web Programlamaya Giriş</td>
-                <td>
-                <ul>
-                  <li>Temel ruby bilgisine sahip olmak</li>
-                  <li>HTTP, Web Server, Request/Response, REST gibi konulara en azından wikipedia’dan göz gezdirmiş olmak</li>
-                  <li>OOP: Object-oriented programming (Nesne yönelimli programlama) bilgisine sahip olmak</li>
-                  <li>Başka bir dilde MVC, ORM tasarım şablonlarını kullanan frameworkler kullanmış olmak</li>
-                  <li>Herhangi bir VCS kullanmış olmak ve tercihen Git biliyor olmak</li>
-                  <li>Bir GitHub hesabına sahip olmak</li>
-                </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Spring MVC ile Web Programlamaya Giriş</td>
-                <td>
-                  <ul>
-                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
-                    <li>Temel Java ve nesne yönelimli programlama bilgisi</li>
-                    <li>GET/POST methodlarının farkı, form post ve AJAX farkı, session ve cookie kullanımı gibi temel web kavramları bilgisi</li>
-                    <li>Servlet ve Java ile web programlama konularında bilgi bir artı sayılacaktır.</li>
-                  </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Web Uygulama Güvenliği ve Güvenli Kod Geliştirme</td>
-                <td>
-                  <ul>
-                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
-                    <li>Temel düzeyde Linux bilgisi</li>
-                    <li>Herhangi bir web programlama diline orta ya da üstü düzeyde hakim olan.</li>
-                  </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Ağ Uzmanlığına Giriş</td>
-                <td>
-                  <ul>
-                    <li>Okuduğunu anlayabilecek düzeyde İngilizce bilgisi</li>
-                    <li>Temel düzeyde Linux ve kabuk bilgisi</li>
-                  </ul>
+                <td th:text="${course.detailPageLink}">Okuduğunu anlayabilecek düzeyde İngilizce bilgisi
                 </td>
             </tr>
         </tbody>
