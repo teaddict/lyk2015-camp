@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col-md-offset-2 col-md-8">
-    <form id="theForm" class="form-horizontal well" th:object="${form}">
+    <form th:action="@{/application}" class="form-horizontal well" th:object="${form}" method="post">
 
       <div class="form-group">
         <label for="email" class="col-lg-2 col-md-2 control-label">E-postanız</label>
@@ -68,44 +68,25 @@
         <div class="col-lg-10 col-md-10">
         <div class="radio radio-primary">
           <label>
-            <input type="radio" name="workStatus" id="workStatus1" th:field="*{application.workStatus}" value="Çalışıyorum">
+            <input type="radio" name="workStatus" id="workStatus1" th:field="*{application.workStatus}" value="WORKING">
           Çalışıyorum
           </label>
         </div>
         <div class="radio radio-primary">
           <label>
-            <input type="radio" id="workStatus2" th:field="*{application.workStatus}" value="Öğrenciyim">
+            <input type="radio" id="workStatus2" th:field="*{application.workStatus}" value="STUDENT">
           Öğrenciyim
           </label>
         </div>
         <div class="radio radio-primary">
           <label>
-            <input type="radio" name="workStatus" id="workStatus2" th:field="*{application.workStatus}" value="Çalışmıyorum (ve öğrenci değilim)">
+            <input type="radio" name="workStatus" id="workStatus2" th:field="*{application.workStatus}" value="NOT_WORKING">
           Çalışmıyorum (ve öğrenci değilim)
           </label>
         </div>
         </div>
       </div>
-      <div class="form-group">
-        <label class="col-lg-2 col-md-2 control-label">Cinsiyetiniz</label>
-        <div class="col-lg-10 col-md-10">
-        <div class="radio radio-primary">
-          <label>
-            <input type="radio" id="sex1" th:field="*{student.sex}" value="MALE"> Erkek
-          </label>
-        </div>
-        <div class="radio radio-primary">
-          <label>
-            <input type="radio" id="sex2" th:field="*{student.sex}" value="FEMALE"> Kadın
-          </label>
-        </div>
-        </div>
-      </div>	
-
-
-
-
-
+     
       <div class="form-group">
         <label for="inputPassword" class="col-lg-2 col-md-2 control-label"></label>
         <div class="col-lg-10 col-md-10">
@@ -156,21 +137,15 @@
         <thead>
             <tr>
                 <th>Kurs Adı</th>
+                <th>Açıklama</th>
                 <th>Ön Koşul</th>
+                <th>Link</th>
             </tr>
         </thead>
-        <tbody th:each="course : ${courseList}">
-            <tr>
-                <td th:text="${course.name}">Linux Sistem Yönetimi (1. Düzey)</td>
-                <td>
-                	<ul>
-                	<li th:text="${course.description}">Gereklilikler</li>
-                	</ul>
-                </td>
-                <td th:text="${course.prerequrities}">Okuduğunu anlayabilecek düzeyde İngilizce bilgisi
-                </td>
-                <td th:text="${course.detailPageLink}">Okuduğunu anlayabilecek düzeyde İngilizce bilgisi
-                </td>
+        <tbody>
+            <tr th:each="course : ${courseList}">
+                <td th:text="${course.name}" target="_blank" th:href="${course.detailPageLink}">Course Name</td>
+                <td th:text="${course.prerequisities}" />
             </tr>
         </tbody>
       </table>
@@ -178,55 +153,39 @@
       <div class="form-group">
         <label for="firstChoice" class="col-lg-2 col-md-2 control-label">1. Tercih</label>
         <div class="col-lg-10 col-md-10">
-        <select class="form-control" id="firstChoice" name="firstChoice">
-          <option value="">Seçiniz</option>
-          <option value="linux-1">Linux Sistem Yönetimi (1. Düzey)</option>
-          <option value="linux-2">Linux Sistem Yönetimi (2. Düzey)</option>
-          <option value="reverse">Kriptografi ve Ters Kod Mühendisliğine Giriş</option>
-          <option value="php">PHP ile Web Programlamaya Giriş</option>
-          <option value="python">Django ve Javascript ile Web Programlamaya Giriş</option>
-          <option value="ror">Ruby on Rails ile Web Programlamaya Giriş</option>
-          <option value="java">Spring MVC ile Web Programlamaya Giriş</option>
-          <option value="security">Web Uygulama Güvenliği ve Güvenli Kod Geliştirme</option>
-          <option value="network">Ağ Uzmanlığına Giriş</option>
+        <select class="form-control" id="firstChoice" name="firstChoice" th:field="*{preferredCourseIds}" th:value="*{preferredCourseIds}">
+
+          <option th:each="course : ${courseList}" 
+			        	  	th:value="${course.id}" 
+			          		th:text="${course.name}" th:selected="${#lists.contains(form.preferredCourseIds,course.id)}">
+		  </option>
         </select>
         </div>
       </div>
-
+      
       <div class="form-group">
         <label for="secondChoice" class="col-lg-2 col-md-2 control-label">2. Tercih</label>
         <div class="col-lg-10 col-md-10">
-        <select class="form-control" id="secondChoice" name="secondChoice">
-          <option value="">Seçiniz</option>
-          <option value="linux-1">Linux Sistem Yönetimi (1. Düzey)</option>
-          <option value="linux-2">Linux Sistem Yönetimi (2. Düzey)</option>
-          <option value="reverse">Kriptografi ve Ters Kod Mühendisliğine Giriş</option>
-          <option value="php">PHP ile Web Programlamaya Giriş</option>
-          <option value="python">Django ve Javascript ile Web Programlamaya Giriş</option>
-          <option value="ror">Ruby on Rails ile Web Programlamaya Giriş</option>
-          <option value="java">Spring MVC ile Web Programlamaya Giriş</option>
-          <option value="security">Web Uygulama Güvenliği ve Güvenli Kod Geliştirme</option>
-          <option value="network">Ağ Uzmanlığına Giriş</option>
+        <select class="form-control" id="secondChoice" name="secondChoice" th:field="*{preferredCourseIds}" th:value="*{preferredCourseIds}">
+          
+          <option th:each="course : ${courseList}" 
+			        	  	th:value="${course.id}" 
+			          		th:text="${course.name}" th:selected="${#lists.contains(form.preferredCourseIds,course.id)}">
+		  </option>
         </select>
         </div>
       </div>
-
+      
       <div class="form-group">
         <label for="thirdChoice" class="col-lg-2 col-md-2 control-label">3. Tercih</label>
         <div class="col-lg-10 col-md-10">
-        <select class="form-control" id="thirdChoice" name="thirdChoice">
-          <option value="">Seçiniz</option>
-          <option value="linux-1">Linux Sistem Yönetimi (1. Düzey)</option>
-          <option value="linux-2">Linux Sistem Yönetimi (2. Düzey)</option>
-          <option value="reverse">Kriptografi ve Ters Kod Mühendisliğine Giriş</option>
-          <option value="php">PHP ile Web Programlamaya Giriş</option>
-          <option value="python">Django ve Javascript ile Web Programlamaya Giriş</option>
-          <option value="ror">Ruby on Rails ile Web Programlamaya Giriş</option>
-          <option value="java">Spring MVC ile Web Programlamaya Giriş</option>
-          <option value="security">Web Uygulama Güvenliği ve Güvenli Kod Geliştirme</option>
-          <option value="network">Ağ Uzmanlığına Giriş</option>
+        <select class="form-control" id="thirdChoice" name="thirdChoice" th:field="*{preferredCourseIds}" th:value="*{preferredCourseIds}">
+
+          <option th:each="course : ${courseList}" 
+			        	  	th:value="${course.id}" 
+			          		th:text="${course.name}" th:selected="${#lists.contains(form.preferredCourseIds,course.id)}">
+		  </option>
         </select>
-        <span class="help-block">Üç tercih yapmak zorunda değilsiniz, tek tercih de yapabilirsiniz.</span>
         </div>
       </div>
 
@@ -235,7 +194,7 @@
         <div class="col-lg-10 col-md-10">
         <div class="togglebutton">
           <label>
-            <input type="checkbox" name="needAccommodation" id="needAccommodation" checked> Yurtta konaklamak istiyorum
+            <input type="checkbox" th:field="*{application.needAccomodation}" th:field="*{application.needAccomodation}" id="needAccommodation" th:checked="*{application.needAccomodation}"> Yurtta konaklamak istiyorum
           </label>
         </div>
         <span class="help-block">Yurtta konaklamak ücretlidir.</span>

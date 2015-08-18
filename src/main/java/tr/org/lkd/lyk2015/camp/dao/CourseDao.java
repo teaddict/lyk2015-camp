@@ -29,5 +29,11 @@ public class CourseDao extends GenericDao<Course>{
 		
 		return criteria.list();
 	}
-
+	
+	@Override
+	public List<Course> getAll() {
+		Criteria criteria = createCriteria();
+		criteria.add(Restrictions.eq("active", true));
+		return criteria.list();
+	}
 }
