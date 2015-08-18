@@ -12,6 +12,8 @@ import org.springframework.validation.Validator;
 import tr.org.lkd.lyk2015.camp.dto.ApplicationFormDto;
 import tr.org.lkd.lyk2015.camp.model.Application.WorkStatus;
 import tr.org.lkd.lyk2015.camp.model.Student;
+import tr.org.lkd.lyk2015.camp.service.BlackListService;
+import tr.org.lkd.lyk2015.camp.service.ExamValidationService;
 import tr.org.lkd.lyk2015.camp.service.TcknValidationService;
 
 @Component
@@ -19,6 +21,13 @@ public class ApplicationFormValidator implements Validator {
 
 	@Autowired
 	private TcknValidationService tcknValidationService;
+
+	// noktalı virgül sonrasında ctrl + space yaparsak otomatik isim geliyor
+	@Autowired
+	private BlackListService blackListService;
+
+	@Autowired
+	private ExamValidationService examValidationService;
 
 	@Override
 	public boolean supports(Class<?> claz) {
@@ -33,7 +42,7 @@ public class ApplicationFormValidator implements Validator {
 
 		// prevent inconsistent working status
 		if (application.getApplication().getWorkStatus() == WorkStatus.NOT_WORKING
-				&& application.getApplication().getOfficer() == true) {
+				&& application.getApplication().getOfficer().equals(true)) {
 			errors.rejectValue("application.workStatus", "error.notWorkingOfficer",
 					"Hem çalışmayıp hem nasıl memursun!");
 		}
@@ -65,6 +74,17 @@ public class ApplicationFormValidator implements Validator {
 			errors.rejectValue("student.tckn", "error.tcknValidate", "Tc Kimlik no hatalı.");
 		}
 
+		boolean checkBlack = this.blackListService.validate(student.getTckn(), student.getEmail(), student.getName(),
+				student.getSurname());
+		if (!checkBlack) {
+			errors.rejectValue("student.email", "error.checkBlackList", "Kara listedesiniz!");
+		}
+
+		// BURASI DEĞİŞCEK
+		boolean checkExam = this.examValidationService.validate(student.getTckn(), student.getEmail());
+		if (!checkBlack) {
+			errors.rejectValue("student.exam", "error.checkExam", "Ön sınavı geçmemişsiniz!");
+		}
 	}
 
 }
