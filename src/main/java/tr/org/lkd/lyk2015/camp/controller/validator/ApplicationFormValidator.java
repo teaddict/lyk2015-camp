@@ -63,7 +63,7 @@ public class ApplicationFormValidator implements Validator {
 		int setSize = set.size();
 
 		if (listSize != setSize) {
-			errors.rejectValue("preferredCourseIds", "error.preferredCourseSame", "Aynı kursu seçemezsiniz!");
+			errors.rejectValue("preferredCourseIds[0]", "error.preferredCourseSame", "Aynı kursu seçemezsiniz!");
 		}
 
 		// bizim bi hata dosyamız var , o dosyadan "error.preferredCourseSame"

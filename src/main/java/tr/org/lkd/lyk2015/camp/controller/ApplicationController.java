@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import tr.org.lkd.lyk2015.camp.controller.validator.ApplicationFormValidator;
 import tr.org.lkd.lyk2015.camp.dto.ApplicationFormDto;
+import tr.org.lkd.lyk2015.camp.service.ApplicationService;
 import tr.org.lkd.lyk2015.camp.service.CourseService;
 
 @Controller
@@ -25,6 +26,9 @@ public class ApplicationController {
 
 	@Autowired
 	private ApplicationFormValidator applicationFormValidator;
+
+	@Autowired
+	private ApplicationService applicationService;
 
 	@InitBinder
 	private void initBinder(final WebDataBinder webDataBinder) {
@@ -45,9 +49,12 @@ public class ApplicationController {
 		if (bindingResult.hasErrors()) {
 			return "application/applicationForm";
 		}
+
+		this.applicationService.create(applicationFormDto);
+
 		model.addAttribute("message", "kaydınız başarılı");
 
-		return "redirect:/application";
+		return "redirect:/application/success";
 	}
 
 }

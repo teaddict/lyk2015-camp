@@ -44,6 +44,10 @@ public class Application extends AbstractBaseModel {
 	private Student owner;
 
 	private boolean needAccomodation;
+	// email confirmation UUID
+	private String validateId;
+	// email conf.
+	private boolean validated = false;
 
 	public WorkStatus getWorkStatus() {
 		return this.workStatus;
@@ -135,5 +139,21 @@ public class Application extends AbstractBaseModel {
 
 	public void setEnglishLevel(Integer englishLevel) {
 		this.englishLevel = englishLevel;
+	}
+
+	public String getValidateId() {
+		return this.validateId;
+	}
+
+	public void setValidateId(String validateId) {
+		this.validateId = validateId;
+	}
+
+	public boolean isValidated() {
+		return this.validated;
+	}
+
+	public void setValidated(boolean validated) {
+		this.validated = validated;
 	}
 }

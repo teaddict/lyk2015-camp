@@ -22,9 +22,9 @@ public abstract class AbstractUser extends AbstractBaseModel {
 	@NotEmpty
 	@Email
 	private String email;
-	@NotEmpty
+
 	private String password;
-	@NotEmpty
+
 	private String phone;
 
 	public String getPhone() {
