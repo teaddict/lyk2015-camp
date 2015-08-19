@@ -50,7 +50,11 @@ public class ApplicationService extends GenericService<Application> {
 
 		// APPLICATION OBJESİNE STUDENTİ BAĞLAYALIM
 		application.setOwner(this.studentService.isExist(applicationFormDto));
-		this.emailService.sendConfirmation(application.getOwner().getEmail(), "Başvuru Onayı", url);
+		if (this.emailService.sendConfirmation(student.getEmail(), "Başvuru Onayı", url)) {
+			System.out.println("email gönderildi.");
+		} else {
+			System.out.println("email gönderilemedi");
+		}
 		this.applicationDao.create(application);
 
 	}
@@ -65,6 +69,19 @@ public class ApplicationService extends GenericService<Application> {
 
 		List<Course> courses = this.courseDao.getByIds(ids);
 		application.getPreferredCourses().addAll(courses);
+	}
+
+	public boolean validate(String validationId) {
+
+		Application application = this.applicationDao.getByValidationId(validationId);
+		if (application == null) {
+			return false;
+		} else {
+			application.setValidated(true);
+			this.applicationDao.update(application);
+			return true;
+		}
+
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -53,6 +54,24 @@ public class ApplicationController {
 		this.applicationService.create(applicationFormDto);
 
 		return "redirect:/application/success";
+	}
+
+	@RequestMapping(value = "/success", method = RequestMethod.GET)
+	public String success(Model model) {
+		model.addAttribute("message", "Başvurunuz Başarıyla Kaydedildi");
+		return "application/success";
+	}
+
+	@RequestMapping(value = "/validate/{id}", method = RequestMethod.GET)
+	public String validate(@PathVariable("id") String id, Model model) {
+
+		if (this.applicationService.validate(id)) {
+			model.addAttribute("message", "Başvurunuz Başarıyla Kaydedildi.");
+			return "application/validated";
+		} else {
+			model.addAttribute("message", "Böyle bir form bulunmamaktadır.");
+			return "application/validated";
+		}
 	}
 
 }
