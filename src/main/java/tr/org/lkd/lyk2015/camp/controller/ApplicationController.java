@@ -45,7 +45,6 @@ public class ApplicationController {
 		if (bindingResult.hasErrors()) {
 			return "application/applicationForm";
 		}
-		model.addAttribute("courseList", this.courseService.getAll());
 		model.addAttribute("message", "kaydınız başarılı");
 
 		return "redirect:/application";

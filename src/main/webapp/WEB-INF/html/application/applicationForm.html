@@ -6,8 +6,8 @@
     <form th:action="@{/application}" class="form-horizontal well" th:object="${form}" method="post">
 	<div class="form-group">
         <label for="email" class="col-lg-2 col-md-2 control-label">Önkoşul Sınavı</label>
-        <div class="col-lg-10 col-md-10" th:errorclass="has-error" name="student.exam">
-          <p th:if="${#fields.hasErrors('student.exam')}" th:errors="*{student.exam}" class="text-danger"></p>
+        <div class="col-lg-10 col-md-10" th:errorclass="has-error" name="student.email">
+          <p th:if="${#fields.hasErrors('student.email')}" th:errors="*{student.email}" class="text-danger"></p>
         </div>
       </div>
       <div class="form-group">
@@ -162,11 +162,11 @@
       <div class="form-group">
         <label for="firstChoice" class="col-lg-2 col-md-2 control-label">1. Tercih</label>
         <div class="col-lg-10 col-md-10">
-        <select class="form-control" id="firstChoice" name="firstChoice" th:field="*{preferredCourseIds}" th:value="*{preferredCourseIds}">
+        <select class="form-control" id="firstChoice" name="firstChoice" th:field="*{preferredCourseIds[0]}" th:value="*{preferredCourseIds[0]}">
 
           <option th:each="course : ${courseList}" 
 			        	  	th:value="${course.id}" 
-			          		th:text="${course.name}" th:selected="${#lists.contains(form.preferredCourseIds,course.id)}">
+			          		th:text="${course.name}" >
 		  </option>
         </select>
         </div>
@@ -175,11 +175,11 @@
       <div class="form-group">
         <label for="secondChoice" class="col-lg-2 col-md-2 control-label">2. Tercih</label>
         <div class="col-lg-10 col-md-10">
-        <select class="form-control" id="secondChoice" name="secondChoice" th:field="*{preferredCourseIds}" th:value="*{preferredCourseIds}">
+        <select class="form-control" id="secondChoice" name="secondChoice" th:field="*{preferredCourseIds[1]}" th:value="*{preferredCourseIds[1]}">
           
           <option th:each="course : ${courseList}" 
 			        	  	th:value="${course.id}" 
-			          		th:text="${course.name}" th:selected="${#lists.contains(form.preferredCourseIds,course.id)}">
+			          		th:text="${course.name}">
 		  </option>
         </select>
         </div>
@@ -188,11 +188,11 @@
       <div class="form-group">
         <label for="thirdChoice" class="col-lg-2 col-md-2 control-label">3. Tercih</label>
         <div class="col-lg-10 col-md-10">
-        <select class="form-control" id="thirdChoice" name="thirdChoice" th:field="*{preferredCourseIds}" th:value="*{preferredCourseIds}">
+        <select class="form-control" id="thirdChoice" name="thirdChoice" th:field="*{preferredCourseIds[2]}" th:value="*{preferredCourseIds[2]}">
 
           <option th:each="course : ${courseList}" 
 			        	  	th:value="${course.id}" 
-			          		th:text="${course.name}" th:selected="${#lists.contains(form.preferredCourseIds,course.id)}">
+			          		th:text="${course.name}">
 		  </option>
         </select>
         </div>
