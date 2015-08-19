@@ -31,6 +31,9 @@ public class ApplicationService extends GenericService<Application> {
 	@Autowired
 	private ApplicationDao applicationDao;
 
+	@Autowired
+	private EmailService emailService;
+
 	private static final String URL_BASE = "http://localhost:8080/camp/application/validate/";
 
 	public void create(ApplicationFormDto applicationFormDto) {
@@ -47,7 +50,7 @@ public class ApplicationService extends GenericService<Application> {
 
 		// APPLICATION OBJESİNE STUDENTİ BAĞLAYALIM
 		application.setOwner(this.studentService.isExist(applicationFormDto));
-
+		this.emailService.sendConfirmation(application.getOwner().getEmail(), "Başvuru Onayı", url);
 		this.applicationDao.create(application);
 
 	}

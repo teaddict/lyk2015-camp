@@ -1,5 +1,6 @@
 package tr.org.lkd.lyk2015.camp.model;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -14,6 +15,7 @@ public abstract class AbstractUser extends AbstractBaseModel {
 	private String name;
 	@NotEmpty
 	private String surname;
+	@Column(unique = true)
 	private Long tckn;
 	@Min(1935)
 	@Max(2003)

@@ -52,8 +52,6 @@ public class ApplicationController {
 
 		this.applicationService.create(applicationFormDto);
 
-		model.addAttribute("message", "kaydınız başarılı");
-
 		return "redirect:/application/success";
 	}
 

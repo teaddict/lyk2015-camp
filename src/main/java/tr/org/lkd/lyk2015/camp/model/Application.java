@@ -6,8 +6,8 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  * This entity represents an application form which is submitted by a Student.
@@ -37,7 +37,9 @@ public class Application extends AbstractBaseModel {
 
 	private String githubLink;
 
-	@OneToMany
+	// tek taraflı relation old için mappedBy yazmadık, bu ilişkiden Course
+	// habersiz
+	@ManyToMany
 	private Set<Course> preferredCourses = new HashSet<>();
 
 	@ManyToOne
