@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import tr.org.lkd.lyk2015.camp.dao.ApplicationDao;
 import tr.org.lkd.lyk2015.camp.dao.CourseDao;
+import tr.org.lkd.lyk2015.camp.dao.StudentDao;
 import tr.org.lkd.lyk2015.camp.dto.ApplicationFormDto;
 import tr.org.lkd.lyk2015.camp.model.Application;
 import tr.org.lkd.lyk2015.camp.model.Course;
@@ -34,7 +35,12 @@ public class ApplicationService extends GenericService<Application> {
 	@Autowired
 	private EmailService emailService;
 
+	@Autowired
+	StudentDao studentDao;
+
 	private static final String URL_BASE = "http://localhost:8080/camp/application/validate/";
+
+	private static final String onayMesajı = "Başvurunuz doğrulanmıştır. Seçilme sonuçları için mailinize bakmayı unutmayın";
 
 	public void create(ApplicationFormDto applicationFormDto) {
 
@@ -49,7 +55,18 @@ public class ApplicationService extends GenericService<Application> {
 		this.getCoursesByIds(application, applicationFormDto.getPreferredCourseIds());
 
 		// APPLICATION OBJESİNE STUDENTİ BAĞLAYALIM
-		application.setOwner(this.studentService.isExist(applicationFormDto));
+		if (this.studentDao.getByTckn(applicationFormDto.getStudent().getTckn()) == null) {
+			// BOYLE YAPMAMIZIN NEDENI STUDENTI DATABASEDEN ÇEKMEMİZ GEREKİYOR
+			// YOKSA OLMAZ; CASCADE EKLEMEMİZ GEREKİYOR
+			// STUDENTI OLUŞTURUP SONRA APPLICATION ILE İLİŞKİLENDİREBİLİRZ
+			Student studentFromDao = new Student();
+			this.studentDao.create(applicationFormDto.getStudent());
+			studentFromDao = applicationFormDto.getStudent();
+			application.setOwner(studentFromDao);
+		} else {
+			application.setOwner(this.studentDao.getByTckn(applicationFormDto.getStudent().getTckn()));
+		}
+
 		if (this.emailService.sendConfirmation(student.getEmail(), "Başvuru Onayı", url)) {
 			System.out.println("email gönderildi.");
 		} else {
@@ -74,13 +91,15 @@ public class ApplicationService extends GenericService<Application> {
 	public boolean validate(String validationId) {
 
 		Application application = this.applicationDao.getByValidationId(validationId);
-		if (application == null) {
-			return false;
+		Student student = application.getOwner();
+		application.setValidated(true);
+		this.applicationDao.update(application);
+		if (this.emailService.sendConfirmation(student.getEmail(), "Başvuru Formu Doğrulaması", onayMesajı)) {
+			System.out.println("email gönderildi.");
 		} else {
-			application.setValidated(true);
-			this.applicationDao.update(application);
-			return true;
+			System.out.println("email gönderilemedi");
 		}
+		return true;
 
 	}
 

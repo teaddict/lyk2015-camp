@@ -9,8 +9,7 @@ import tr.org.lkd.lyk2015.camp.model.Student;
 @Repository
 public class StudentDao extends GenericDao<Student> {
 
-	@Override
-	public Student getById(Long tckn) {
+	public Student getByTckn(Long tckn) {
 		Criteria c = this.createCriteria();
 
 		c.add(Restrictions.eq("tckn", tckn));
