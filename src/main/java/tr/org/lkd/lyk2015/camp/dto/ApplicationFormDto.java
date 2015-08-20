@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import tr.org.lkd.lyk2015.camp.model.Application;
+import tr.org.lkd.lyk2015.camp.model.Course;
 import tr.org.lkd.lyk2015.camp.model.Student;
 
 public class ApplicationFormDto {
@@ -16,6 +17,10 @@ public class ApplicationFormDto {
 	Student student = new Student();
 	@Size(min = 1, max = 3)
 	public List<Long> preferredCourseIds = Arrays.asList(null, null, null);
+
+	public ApplicationFormDto() {
+		this.application.getPreferredCourses().add(new Course());
+	}
 
 	public List<Long> getPreferredCourseIds() {
 		return this.preferredCourseIds;

@@ -3,6 +3,7 @@ package tr.org.lkd.lyk2015.camp.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,17 +23,19 @@ public class Application extends AbstractBaseModel {
 		WORKING, STUDENT, NOT_WORKING
 	}
 
+	@Column(nullable = false, length = 4)
 	private Integer year;
 
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private WorkStatus workStatus;
-
+	@Column(nullable = false)
 	private Boolean officer = false;
 
 	private String corporation;
 
 	private String workDetails;
-
+	@Column(nullable = false)
 	private Integer englishLevel = 0;
 
 	private String githubLink;
@@ -40,16 +43,22 @@ public class Application extends AbstractBaseModel {
 	// tek taraflı relation old için mappedBy yazmadık, bu ilişkiden Course
 	// habersiz
 	@ManyToMany
+	@Column(nullable = false)
 	private Set<Course> preferredCourses = new HashSet<>();
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Student owner;
-
-	private boolean needAccomodation;
+	@Column(nullable = false)
+	private boolean needAccomodation = false;
 	// email confirmation UUID
+	@Column(nullable = false)
 	private String validateId;
 	// email conf.
+	@Column(nullable = false)
 	private boolean validated = false;
+	// kampa seçildi
+	@Column(nullable = false)
+	private boolean selected = false;
 
 	public WorkStatus getWorkStatus() {
 		return this.workStatus;
@@ -157,5 +166,13 @@ public class Application extends AbstractBaseModel {
 
 	public void setValidated(boolean validated) {
 		this.validated = validated;
+	}
+
+	public boolean isSelected() {
+		return this.selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 }

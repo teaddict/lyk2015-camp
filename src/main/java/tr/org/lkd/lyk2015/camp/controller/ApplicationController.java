@@ -74,4 +74,11 @@ public class ApplicationController {
 		}
 	}
 
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(Model model) {
+
+		model.addAttribute("applications", this.applicationService.getAll());
+		return "application/listApplication";
+	}
+
 }

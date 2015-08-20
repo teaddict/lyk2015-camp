@@ -2,24 +2,28 @@ package tr.org.lkd.lyk2015.camp.model;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class AbstractBaseModel {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Column(nullable = false)
 	private Calendar createDate;
+	@Column(nullable = false)
 	private Calendar updateDate;
+
 	private Calendar deleteDate;
-	
-	private Boolean deleted=false;
+	@Column(nullable = false)
+	private Boolean deleted = false;
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -27,7 +31,7 @@ public abstract class AbstractBaseModel {
 	}
 
 	public Calendar getCreateDate() {
-		return createDate;
+		return this.createDate;
 	}
 
 	public void setCreateDate(Calendar createDate) {
@@ -35,7 +39,7 @@ public abstract class AbstractBaseModel {
 	}
 
 	public Calendar getUpdateDate() {
-		return updateDate;
+		return this.updateDate;
 	}
 
 	public void setUpdateDate(Calendar updateDate) {
@@ -43,7 +47,7 @@ public abstract class AbstractBaseModel {
 	}
 
 	public Calendar getDeleteDate() {
-		return deleteDate;
+		return this.deleteDate;
 	}
 
 	public void setDeleteDate(Calendar deleteDate) {
@@ -51,7 +55,7 @@ public abstract class AbstractBaseModel {
 	}
 
 	public Boolean getDeleted() {
-		return deleted;
+		return this.deleted;
 	}
 
 	public void setDeleted(Boolean deleted) {
@@ -62,27 +66,30 @@ public abstract class AbstractBaseModel {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (this.getClass() != obj.getClass()) {
 			return false;
+		}
 		AbstractBaseModel other = (AbstractBaseModel) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (this.id == null) {
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!this.id.equals(other.id)) {
 			return false;
+		}
 		return true;
 	}
-	
-	
-	
+
 }

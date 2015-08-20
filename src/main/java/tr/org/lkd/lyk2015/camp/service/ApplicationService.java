@@ -1,11 +1,13 @@
 package tr.org.lkd.lyk2015.camp.service;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import tr.org.lkd.lyk2015.camp.dao.ApplicationDao;
@@ -38,6 +40,9 @@ public class ApplicationService extends GenericService<Application> {
 	@Autowired
 	StudentDao studentDao;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	private static final String URL_BASE = "http://localhost:8080/camp/application/validate/";
 
 	private static final String onayMesajı = "Başvurunuz doğrulanmıştır. Seçilme sonuçları için mailinize bakmayı unutmayın";
@@ -63,9 +68,14 @@ public class ApplicationService extends GenericService<Application> {
 			this.studentDao.create(applicationFormDto.getStudent());
 			studentFromDao = applicationFormDto.getStudent();
 			application.setOwner(studentFromDao);
+
 		} else {
 			application.setOwner(this.studentDao.getByTckn(applicationFormDto.getStudent().getTckn()));
 		}
+
+		String uuid = UUID.randomUUID().toString();
+		application.getOwner().setPassword(this.passwordEncoder.encode("lyk2015"));
+		application.setYear(Calendar.getInstance().get(Calendar.YEAR));
 
 		if (this.emailService.sendConfirmation(student.getEmail(), "Başvuru Onayı", url)) {
 			System.out.println("email gönderildi.");
@@ -85,6 +95,7 @@ public class ApplicationService extends GenericService<Application> {
 	public void getCoursesByIds(Application application, List<Long> ids) {
 
 		List<Course> courses = this.courseDao.getByIds(ids);
+		application.getPreferredCourses().clear();
 		application.getPreferredCourses().addAll(courses);
 	}
 
@@ -93,6 +104,8 @@ public class ApplicationService extends GenericService<Application> {
 		Application application = this.applicationDao.getByValidationId(validationId);
 		Student student = application.getOwner();
 		application.setValidated(true);
+		// update çağırmasam da transactional old için
+		// yaptığımd eğişiklikleri direk database yazar
 		this.applicationDao.update(application);
 		if (this.emailService.sendConfirmation(student.getEmail(), "Başvuru Formu Doğrulaması", onayMesajı)) {
 			System.out.println("email gönderildi.");
