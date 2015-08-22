@@ -86,13 +86,15 @@ public class ApplicationService extends GenericService<Application> {
 		}
 
 		application.setYear(Calendar.getInstance().get(Calendar.YEAR));
+
+		this.applicationDao.create(application);
+
 		url = url + "\ngiriş bilgileriniz\n" + studentFromDao.getEmail() + "\nŞifreniz: " + password;
 		if (this.emailService.sendConfirmation(student.getEmail(), "Başvuru Onayı", url)) {
 			System.out.println("email gönderildi.");
 		} else {
 			System.out.println("email gönderilemedi");
 		}
-		this.applicationDao.create(application);
 
 	}
 
