@@ -16,6 +16,7 @@
 				<th>E-mail</th>
 				<th>Phone</th>
 				<th>Validated</th>
+				<th>Selected</th>
 
 			</thead>
 			<tbody>
@@ -36,11 +37,15 @@
 					<td th:text="*{owner.phone}"></td>
 
 					<td th:text="*{validated}"></td>
+					<td><input type="checkbox" name="active" th:checked="*{selected}" th:value="*{selected}"/></td>
 					<td>
-						<a th:href="@{/applications/select/__*{id}__}" class="btn btn-primary">Seç</a>
+						<a th:href="@{/application/select/__*{id}__}" class="btn btn-primary">Onayla</a>
 					</td>
 					<td>
-						<a th:href="@{/applications/update/__*{id}__}" class="btn btn-primary">Edit</a>
+						<a th:href="@{/application/reject/__*{id}__}" class="btn btn-primary">Reddet</a>
+					</td>
+					<td>
+						<a th:href="@{/application/update/__*{id}__}" class="btn btn-primary">Edit</a>
 					</td>
 				</tr>
 			</tbody>

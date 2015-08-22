@@ -180,4 +180,31 @@ public class ApplicationService extends GenericService<Application> {
 
 	}
 
+	// BAŞVURUYU KABUL EDİP ÖĞRENCİYİ ÇAĞIRALIM
+	public void selectApp(Long id) {
+		Application application = this.applicationDao.getById(id);
+		Student student = this.studentDao.getById(application.getOwner().getId());
+		application.setSelected(true);
+		String subj = "Kurs Kabul Bildirimi";
+		String cont = "Başvurduğunuz Kurs için seçildiniz! Detayları göndereceğiz.";
+		if (this.emailService.sendConfirmation(student.getEmail(), subj, cont)) {
+			System.out.println("email gönderildi.");
+		} else {
+			System.out.println("email gönderilemedi");
+		}
+
+	}
+
+	public void rejectApp(Long id) {
+		Application application = this.applicationDao.getById(id);
+		Student student = this.studentDao.getById(application.getOwner().getId());
+		String subj = "Kurs Sonuç Bildirimi";
+		String cont = "Başvurduğunuz Kurs için seçilemediniz! Yine de her an bi süpriz olabilir,gözünüz emailinizde olsun.";
+		if (this.emailService.sendConfirmation(student.getEmail(), subj, cont)) {
+			System.out.println("email gönderildi.");
+		} else {
+			System.out.println("email gönderilemedi");
+		}
+	}
+
 }

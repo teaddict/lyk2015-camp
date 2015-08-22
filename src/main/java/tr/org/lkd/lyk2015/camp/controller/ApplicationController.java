@@ -111,6 +111,20 @@ public class ApplicationController {
 		}
 	}
 
+	@RequestMapping(value = "/select/{id}", method = RequestMethod.GET)
+	public String selectApplication(@PathVariable("id") Long id, Model model) {
+
+		this.applicationService.selectApp(id);
+		return "redirect:/application/list";
+	}
+
+	@RequestMapping(value = "/reject/{id}", method = RequestMethod.GET)
+	public String rejectApplication(@PathVariable("id") Long id, Model model) {
+
+		this.applicationService.rejectApp(id);
+		return "redirect:/application/liss";
+	}
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
 
