@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,13 +22,21 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	// Yukardan aşağı doğru çalışır bu yüzden ona göre vermemiz gerekiyor
+	//
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// ziyaretçi -> kurs listesini, eğitmen listesini, başvuru formunu
+		// görüntüleyebilir
+		// admin -> herşeye hakkı var
+		// course ve instructor admin tarafından eklenir.
+		// student ise application formuyla eklenir.
 		http.authorizeRequests()
-				.antMatchers("/courses/**", "/instructors/**", "/admins/create", "/application", "/application/success",
+				.antMatchers("/courses", "/instructors", "/application", "/application/success/**",
 						"/application/validate/**", "/resources/**")
-				.permitAll().antMatchers(HttpMethod.POST, "/admins").permitAll().anyRequest().authenticated().and()
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).and().formLogin();
+				.permitAll().antMatchers("/instructors/**", "/application/**", "/courses/**", "/admins/**")
+				.hasAuthority("ADMIN").anyRequest().authenticated().and().logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).and().formLogin();
 	}
 
 	@Autowired

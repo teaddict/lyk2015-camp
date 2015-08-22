@@ -41,6 +41,11 @@
 			<button type="submit" class="btn btn-info">Submit</button>
 			
 			</div>
+			
+	<input type="date" th:field="*{createDate}" th:value="${course.createDate}">
+	<input type="date" th:field="*{updateDate}" th:value="${course.updateDate}">
+	<input type="date" th:field="*{deleteDate}" th:value="${course.deleteDate}">	
+			
 		</form>
 
 		<!-- 	create form  stop-->

@@ -4,6 +4,7 @@
   <div class="row">
     <div class="col-md-offset-2 col-md-8">
     <form th:action="@{/application}" class="form-horizontal well" th:object="${form}" method="post">
+    <input type="hidden" th:field="*{application.id}" th:value="*{application.id}">
 	<div class="form-group">
         <label for="email" class="col-lg-2 col-md-2 control-label">Önkoşul Sınavı</label>
         <div class="col-lg-10 col-md-10" th:errorclass="has-error" name="student.email">

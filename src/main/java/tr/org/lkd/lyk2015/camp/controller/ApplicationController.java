@@ -3,6 +3,7 @@ package tr.org.lkd.lyk2015.camp.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import tr.org.lkd.lyk2015.camp.controller.validator.ApplicationFormValidator;
 import tr.org.lkd.lyk2015.camp.dto.ApplicationFormDto;
+import tr.org.lkd.lyk2015.camp.model.Student;
 import tr.org.lkd.lyk2015.camp.service.ApplicationService;
 import tr.org.lkd.lyk2015.camp.service.CourseService;
 
@@ -37,21 +39,56 @@ public class ApplicationController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String getCourseCreate(@ModelAttribute("form") ApplicationFormDto applicationFormDto, Model model) {
+	public String getCourseCreate(@ModelAttribute("form") ApplicationFormDto applicationFormDto, Model model,
+			Authentication authentication) {
+
+		Student student = null;
+		if (authentication != null && authentication.getPrincipal() instanceof Student) {
+			student = (Student) authentication.getPrincipal();
+
+		}
+
+		if (student != null) {
+			// user is updating the form
+			ApplicationFormDto formDto = this.applicationService.createApplicationDto(student.getId());
+			model.addAttribute("form", formDto);
+			model.addAttribute("update", true);
+
+		} else {
+			// new user creating a new application
+			model.addAttribute("form", new ApplicationFormDto());
+
+		}
+
 		model.addAttribute("courseList", this.courseService.getAll());
 		return "application/applicationForm";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String postAdminCreate(@ModelAttribute("form") @Valid ApplicationFormDto applicationFormDto,
-			BindingResult bindingResult, Model model) {
+			BindingResult bindingResult, Model model, Authentication authentication) {
 		// bindingresult her zaman solundaki formun hatalarını alır
 		model.addAttribute("courseList", this.courseService.getAll());
 		if (bindingResult.hasErrors()) {
 			return "application/applicationForm";
-		}
+		} else {
+			if (applicationFormDto.getApplication().getId() == null) {
+				this.applicationService.create(applicationFormDto);
+				model.addAttribute("message", "Başvurunuz başarıyla alındı, epostanızı kontrol ediniz.");
+			} else {
 
-		this.applicationService.create(applicationFormDto);
+				Student student = null;
+				if (authentication != null && authentication.getPrincipal() instanceof Student) {
+					student = (Student) authentication.getPrincipal();
+				} else {
+					return "error";
+				}
+				this.applicationService.isUserAuthorizedForForm(student, applicationFormDto.getApplication());
+
+				this.applicationService.update(applicationFormDto);
+				model.addAttribute("message", "Başvurunuz başarıyla gucellendi.");
+			}
+		}
 
 		return "redirect:/application/success";
 	}
