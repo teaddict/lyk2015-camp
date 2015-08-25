@@ -79,11 +79,11 @@ public class InstructorController {
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String postInstructornUpdate(@PathVariable("id") Long id, @ModelAttribute Instructor instructor,
-			Model model) {
+	public String postInstructornUpdate(@PathVariable("id") Long id, @ModelAttribute Instructor instructor, Model model,
+			@RequestParam("courseIds") List<Long> ids) {
 
 		instructor.setCreateDate(this.instructorService.getById(id).getCreateDate());
-		this.instructorService.update(instructor);
+		this.instructorService.update(instructor, ids);
 		return "redirect:/instructors";
 	}
 

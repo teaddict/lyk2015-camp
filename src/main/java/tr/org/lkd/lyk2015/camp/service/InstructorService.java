@@ -1,6 +1,8 @@
 package tr.org.lkd.lyk2015.camp.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -37,6 +39,15 @@ public class InstructorService extends GenericService<Instructor> {
 		 */
 		instructor.setPassword(this.passwordEncoder.encode(instructor.getPassword()));
 		this.instructorDao.create(instructor);
+	}
+
+	public void update(Instructor instructor, List<Long> ids) {
+
+		List<Course> courses = this.courseDao.getByIds(ids);
+		Set<Course> setCourse = new HashSet<>(courses);
+		instructor.setCourses(setCourse);
+
+		this.instructorDao.update(instructor);
 	}
 
 	public Instructor getInstructorWithCourses(Long id) {
